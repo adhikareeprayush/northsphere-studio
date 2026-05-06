@@ -1,5 +1,8 @@
 # Northsphere Studio — website
 
+<img width="1918" height="1078" alt="image" src="https://github.com/user-attachments/assets/de6d9f6e-525d-4d05-9b79-f048d0e2521d" />
+
+
 Marketing site for **Northsphere Studio**: pages for services, projects, blog, contact (with form submission), careers, and legal content. Built with the Next.js App Router.
 
 ## Stack
