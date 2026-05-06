@@ -1,101 +1,96 @@
+import type { Metadata } from "next";
 import PageHeader from "@/components/Resuable/PageHeader";
-import ProductCard from "@/components/Resuable/ProductCard";
 import AnimatedSection from "@/components/Resuable/AnimatedSection";
+import ProjectsCatalog from "@/components/Projects/ProjectsCatalog";
 import Footer from "@/components/Homepage/Footer";
 import Link from "next/link";
+import { SITE_NAME } from "@/lib/site";
+import { visual } from "@/lib/visuals";
 
-const products = [
+export const metadata: Metadata = {
+  title: "Projects",
+  description: `Selected product and campaign work from ${SITE_NAME}—SaaS, commerce, and brand systems.`,
+};
+
+const projects = [
   {
-    title: "Hospital system",
+    title: "Helio — progressive web banking",
     description:
-      "Custom websites and web applications built with modern technologies and best practices.",
-    image: "/projects/project1.png",
-    category: "Development",
-    link: "https://nisargahospitalnepal.com",
+      "Role-based flows, accessible components, and telemetry-ready navigation for a multi-region launch.",
+    image: visual.projectA,
+    category: "Product",
+    link: "/contact",
   },
   {
-    title: "Cosmetic E-commerce",
+    title: "Mint Grove — seasonal commerce surge",
     description:
-      "Native and cross-platform mobile applications for iOS and Android.",
-    image: "/projects/project2.png",
-    category: "Development",
-    link: "https://careandcleannp.com",
+      "Composable storefront experiments with cohort-specific merchandising and lifecycle email hooks.",
+    image: visual.projectB,
+    category: "Commerce",
+    link: "/contact",
   },
   {
-    title: "Perfume Ecommerce",
+    title: "Orbit Labs — brand & documentation hub",
     description:
-      "Beautiful and intuitive user interfaces designed for optimal user experience.",
-    image: "/projects/project3.png",
-    category: "Development",
-    link: "https://desireofficial.com",
+      "Modular identity toolkit paired with a docs site engineers actually maintain.",
+    image: visual.projectC,
+    category: "Brand",
+    link: "/contact",
   },
   {
-    title: "Website development and Digital Marketing Services",
+    title: "Signal Desk — executive analytics layer",
     description:
-      "Comprehensive digital marketing strategies to boost your online presence.",
-    image: "/projects/project4.png",
-    link: "https://www.octagonconsultancy.edu.np/",
-    category: "Development & Marketing",
+      "Narrowed KPI narratives and drill-down patterns tailored for weekly leadership reviews.",
+    image: visual.projectD,
+    category: "Data UX",
+    link: "/contact",
   },
   {
-    title: "Perfume Ecommerce",
+    title: "Wavefront — growth experimentation lane",
     description:
-      "FleetBox Vechicle Monitoring Solutions is a leading company in GPS-based Vehicle Tracking and Management Solutions in India, Nepal & Australia.",
-    image: "/projects/fleetbox.png",
-    category: "Development",
-    link: "https://fleetboxvms.com",
+      "Rapid landing matrix with shared design tokens and statistically framed readouts.",
+    image: visual.projectE,
+    category: "Growth",
+    link: "/contact",
+  },
+  {
+    title: "Atlas Field — ops & workflow platform",
+    description:
+      "Approvals, audit trails, and role-aware tasking for distributed ops teams under strict SLAs.",
+    image: visual.projectF,
+    category: "Platform",
+    link: "/contact",
   },
 ];
 
 export default function ProductsPage() {
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="min-h-screen bg-surface-page">
       <PageHeader
-        subtitle="Our Products"
-        title="Solutions That Drive Results"
-        description="Discover our comprehensive range of digital products and services designed to help your business thrive in the digital age."
+        variant="projects"
+        subtitle="Case studies"
+        title="Work that shipped under pressure"
+        description="Representative engagements—names adjusted where NDAs apply. Ask us for deeper references on a call."
       />
 
-      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24">
-        <AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product, index) => (
-              <Link
-                href={product.link}
-                key={index}
-                target={product.link.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  product.link.startsWith("http")
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                className="block"
-              >
-                <ProductCard
-                  key={index}
-                  title={product.title}
-                  description={product.description}
-                  image={product.image}
-                  category={product.category}
-                  index={index}
-                />
-              </Link>
-            ))}
-          </div>
-        </AnimatedSection>
+      <div className="page-shell py-10 md:py-12">
+        <ProjectsCatalog projects={projects} />
 
-        <AnimatedSection delay={0.3} className="mt-20 text-center">
-          <div className="bg-primary text-white rounded-3xl p-12 md:p-16">
-            <h2 className="font-jakarta font-bold text-3xl md:text-5xl mb-6">
-              Can&apos;t find what you&apos;re looking for?
+        <AnimatedSection delay={0.3} className="mt-12 text-center md:mt-14">
+          <div className="surface-green rounded-3xl px-8 py-10 md:px-12 md:py-14">
+            <h2 className="mb-4 font-jakarta text-2xl font-bold md:text-4xl lg:text-5xl">
+              Need something adjacent?
             </h2>
-            <p className="text-xl text-gray-400 mb-8 opacity-90 max-w-2xl mx-auto">
-              We offer custom solutions tailored to your specific needs.
-              Let&apos;s discuss your project.
+            <p className="mx-auto mb-8 max-w-2xl text-base md:text-xl">
+              Bring a messy roadmap—we&apos;ll help sequence design, build, and
+              proof.
             </p>
-            <button className="bg-white text-primary px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition-all">
-              Contact Us
-            </button>
+            <Link
+              href="/contact"
+              className="inline-block rounded-full bg-white px-8 py-4 font-bold text-primary no-underline transition-colors hover:bg-white/95"
+            >
+              Start a thread
+            </Link>
           </div>
         </AnimatedSection>
       </div>

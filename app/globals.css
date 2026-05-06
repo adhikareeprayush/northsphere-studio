@@ -1,24 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Syne:wght@400..800&display=swap");
 @import "tailwindcss";
 
 :root {
+  --foreground: #3d4540;
 }
 
 @theme inline {
-  --color-primary: #0f660f;
+  /* Forest green #14532D — WCAG AA white text at 16px+ */
+  --color-primary: #14532d;
+  --color-primary-hover: #0f3d21;
+  --color-accent: #c94a28;
   --color-black: #020407;
-  --font-jakarta: "Plus Jakarta Sans", sans-serif;
-  --font-manrope: "Manrope", sans-serif;
+  --color-surface-page: #f2f4f1;
+  --color-surface-muted: #e6eae4;
+  --color-surface-card: #ffffff;
+  --color-surface-dark: #0f1a14;
+  --color-stroke: #c8d2c2;
+  --color-text-heading: #141a16;
+  --color-text-body: #545c56;
+  --font-jakarta: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-manrope: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   color: var(--foreground);
-  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif !important;
   min-height: 100vh;
+  background-color: var(--color-surface-page);
 }
 
 button {
-  font-family: "Manrope", sans-serif;
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 .background-noise {
@@ -34,57 +46,86 @@ button {
 }
 
 p {
-  color: #878c91;
+  color: var(--color-text-body);
 }
 
-/* Animations */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@keyframes artifact-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  33% {
+    transform: translate(-14px, 18px) scale(1.04);
   }
-}
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  66% {
+    transform: translate(12px, -14px) scale(0.97);
   }
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.artifact-float {
+  animation: artifact-float 20s ease-in-out infinite;
 }
 
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
+.artifact-float-delayed {
+  animation: artifact-float 26s ease-in-out infinite;
+  animation-delay: -8s;
 }
 
-.animate-slide-up {
-  animation: slide-up 0.8s ease-out forwards;
+/* Green surfaces: force readable white copy (override global `p` color). */
+.surface-green,
+.surface-green-diagonal {
+  @apply text-white;
+}
+.surface-green :is(p, span, li, h1, h2, h3, h4, h5, h6, label, strong),
+.surface-green-diagonal :is(p, span, li, h1, h2, h3, h4, h5, h6, label, strong) {
+  color: #ffffff !important;
+}
+.surface-green a:not([class*="bg-white"]),
+.surface-green-diagonal a:not([class*="bg-white"]) {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.surface-green {
+  @apply bg-primary;
+}
+.surface-green-diagonal {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--color-primary),
+    var(--color-primary-hover)
+  );
 }
 
-.animate-scale-in {
-  animation: scale-in 0.5s ease-out forwards;
+.artifact-grid {
+  background-image:
+    linear-gradient(rgba(20, 83, 45, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 83, 45, 0.16) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
 }
 
-/* Swiper Custom Styles */
-.swiper-button-disabled {
-  opacity: 0.3 !important;
-  cursor: not-allowed !important;
+/* Shared layout rhythm — aligned with Nav/Footer */
+.section-inner {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.page-shell {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.card-surface {
+  @apply rounded-2xl border border-stroke bg-surface-card shadow-sm;
+}
+
+.banner-text-shadow {
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.55),
+    0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.banner-title-shadow {
+  text-shadow:
+    0 4px 28px rgba(0, 0, 0, 0.72),
+    0 2px 8px rgba(0, 0, 0, 0.55);
 }

@@ -1,91 +1,75 @@
 import Image from "next/image";
+import { SectionArtifacts } from "../Resuable/SectionArtifacts";
+import { visual } from "@/lib/visuals";
 
 const HowWeWork = () => {
   return (
-    <section className="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 py-10 sm:py-14 md:py-18 gap-10 sm:gap-14 md:gap-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-center">
-        <h1 className="col-span-1 text-gray-500 text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold tracking-tighter leading-tight md:leading-12">
-          Provide the best service with out of the box ideas
-        </h1>
-        <p className="col-span-1 text-sm sm:text-base">
-          We are a passionate team of tech enthusiasts dedicated to helping
-          businesses succeed in the digital world. With years of experience and
-          a deep understanding of the ever-evolving online landscape, we stay at
-          the forefront of industry trends and technologies.
+    <section className="section-inner relative flex flex-col gap-10 py-12 md:gap-12 md:py-14">
+      <SectionArtifacts subtle />
+      <div className="relative z-10 grid grid-cols-1 items-end gap-8 md:grid-cols-2 md:gap-12">
+        <h2 className="font-jakarta text-2xl font-semibold tracking-tight text-text-heading sm:text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-tight">
+          Systems, craft, and measurable delivery
+        </h2>
+        <p className="max-w-xl text-base leading-relaxed text-text-body md:justify-self-end">
+          We embed with product and marketing leads—prototypes fast, document
+          decisions, and keep momentum through QA, launch, and iteration.
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-5 items-center justify-between gap-6 sm:gap-8 md:gap-10">
-        <div className="flex relative flex-col lg:col-span-2 h-[280px] sm:h-[320px] md:h-[382px] bg-primary rounded-2xl md:rounded-3xl w-full p-6 sm:p-8 md:p-10 justify-between gap-4 sm:gap-6 overflow-hidden">
+
+      <div className="relative z-10 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-5 lg:gap-8">
+        <div className="relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-2xl border border-stroke bg-primary p-8 shadow-sm lg:col-span-2 lg:min-h-[380px] lg:p-10">
           <Image
             src="/bg.png"
-            alt="Background Decorative Image"
+            alt=""
             width={600}
             height={500}
-            className="absolute h-[400px] sm:h-[500px] md:h-[650px] w-[400px] sm:w-[500px] md:w-[650px] max-w-none transform rotate-45 object-cover -top-24 sm:-top-32 md:-top-40 -left-10 sm:-left-14 md:-left-16 opacity-40"
+            className="pointer-events-none absolute -left-24 -top-24 h-[420px] w-[420px] max-w-none rotate-45 object-cover opacity-25"
           />
-          <div className="flex flex-col z-10">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[84px] text-white font-bold leading-tight md:leading-20">
-              60
-              <span className="text-[#99CF63]">+</span>
-            </h1>
-            <p className="text-[#878C91] text-sm sm:text-base md:text-[19px] font-medium leading-6 sm:leading-8">
-              Project finish with superbly
+          <div className="relative z-10">
+            <p className="font-jakarta text-6xl font-bold leading-none text-white sm:text-7xl md:text-8xl">
+              48<span className="text-white/90">+</span>
+            </p>
+            <p className="mt-4 max-w-[14rem] text-sm leading-relaxed text-white sm:text-base">
+              Milestones shipped—design systems, APIs, and campaigns in-market.
             </p>
           </div>
-          <div className="flex items-center gap-1 sm:gap-2 z-10">
-            <Image
-              src="/companies/nisargalogo.png"
-              alt="Profile Image"
-              width={40}
-              height={40}
-              className="rounded-full object-contain w-10 h-10 sm:w-14 sm:h-14 md:size-18 border-2 bg-white border-white"
-            />
-            <Image
-              src="/companies/careandclean.png"
-              alt="Profile Image"
-              width={40}
-              height={40}
-              className="rounded-full object-contain w-10 h-10 sm:w-14 sm:h-14 md:size-18 border-2 bg-white border-white"
-            />
-            <Image
-              src="/companies/shabdastralogo.png"
-              alt="Profile Image"
-              width={40}
-              height={40}
-              className="rounded-full object-contain w-10 h-10 sm:w-14 sm:h-14 md:size-18 border-2 bg-white border-white"
-            />
-            <Image
-              src="/companies/fleetbox.png"
-              alt="Profile Image"
-              width={40}
-              height={40}
-              className="rounded-full object-contain w-10 h-10 sm:w-14 sm:h-14 md:size-18 border-2 bg-white border-white"
-            />
-            <span className="text-4xl sm:text-5xl md:text-7xl font-semibold text-white">
-              +
-            </span>
+          <div className="relative z-10 flex flex-wrap gap-2">
+            {["Research", "Design", "Build", "Grow"].map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-white/35 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
-        <div className="flex lg:col-span-3 relative h-[250px] sm:h-[300px] md:h-[382px] items-center justify-center">
+
+        <div className="relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-2xl border border-stroke shadow-sm lg:col-span-3 lg:min-h-[380px]">
           <Image
-            className="absolute w-full h-full object-cover rounded-2xl md:rounded-4xl"
-            src="/how-we-work.png"
-            alt="How We Work Image"
-            width={800}
-            height={382}
+            className="absolute inset-0 h-full w-full object-cover brightness-[0.55]"
+            src={visual.workspace}
+            alt=""
+            width={1600}
+            height={1000}
+            sizes="(max-width: 1024px) 100vw, 60vw"
           />
-          <div className="flex items-center justify-center border-6 sm:border-8 md:border-10 border-white rounded-full bg-[#EA6038] w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] absolute -bottom-6 sm:-bottom-8 md:-bottom-10 -right-2 sm:-right-6 md:-right-10">
-            <Image
-              src="/play.svg"
-              alt="Play Video"
-              width={44}
-              height={44}
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-11 md:h-11"
-            />
+          <div className="absolute inset-0 bg-surface-dark/40" />
+          <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
+            <div className="pointer-events-none absolute left-1/4 top-1/4 h-24 w-24 rounded-full bg-white/15 blur-2xl" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-surface-card bg-accent shadow-md">
+              <Image
+                src="/play.svg"
+                alt=""
+                width={28}
+                height={28}
+                className="ml-0.5 h-7 w-7"
+              />
+            </div>
+            <h3 className="font-jakarta text-2xl font-semibold tracking-[0.18em] text-white banner-title-shadow sm:text-3xl md:text-4xl">
+              HOW WE WORK
+            </h3>
           </div>
-          <h3 className="z-100 font-semibold text-xl sm:text-3xl md:text-4xl lg:text-[48px] text-white tracking-[4px] sm:tracking-[6px] md:tracking-[10px] text-center px-4">
-            HOW WE WORK
-          </h3>
         </div>
       </div>
     </section>

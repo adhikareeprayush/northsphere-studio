@@ -1,16 +1,26 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Users, Workflow, Headphones } from "lucide-react";
 import PageHeader from "@/components/Resuable/PageHeader";
 import ServiceCard from "@/components/Resuable/ServiceCard";
 import AnimatedSection from "@/components/Resuable/AnimatedSection";
 import Footer from "@/components/Homepage/Footer";
+import { SITE_NAME } from "@/lib/site";
 
+export const metadata: Metadata = {
+  title: "Services",
+  description: `Web and mobile engineering, UI/UX, DevOps, STEM programs, and growth campaigns from ${SITE_NAME}.`,
+};
+
+/** Six core offerings shown on the services grid. */
 const services = [
   {
     title: "Web Development",
     description:
-      "Build stunning, responsive websites and web applications using cutting-edge technologies like React, Next.js, and Node.js. We ensure your digital presence is fast, secure, and scalable.",
+      "Responsive websites and web apps with React, Next.js, and Node.js—fast, secure, and built to scale with your roadmap.",
     icon: (
       <svg
-        className="w-8 h-8 text-white"
+        className="h-8 w-8 text-primary"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -27,10 +37,10 @@ const services = [
   {
     title: "Mobile App Development",
     description:
-      "Create powerful native and cross-platform mobile applications for iOS and Android. From concept to deployment, we deliver apps that users love.",
+      "Native and cross-platform apps for iOS and Android—from discovery through store submission and analytics instrumentation.",
     icon: (
       <svg
-        className="w-8 h-8 text-white"
+        className="h-8 w-8 text-primary"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -47,10 +57,10 @@ const services = [
   {
     title: "UI/UX Design",
     description:
-      "Design beautiful, intuitive interfaces that engage users and drive conversions. We focus on user research, wireframing, prototyping, and testing.",
+      "Research-backed interfaces: flows, systems, and prototypes tested with real users so shipping feels inevitable.",
     icon: (
       <svg
-        className="w-8 h-8 text-white"
+        className="h-8 w-8 text-primary"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -67,10 +77,10 @@ const services = [
   {
     title: "Digital Marketing",
     description:
-      "Boost your online presence with comprehensive digital marketing strategies including SEO, SEM, social media marketing, and content marketing.",
+      "SEO, paid media, and content tied to measurable outcomes—not dashboards that look busy but move nothing.",
     icon: (
       <svg
-        className="w-8 h-8 text-white"
+        className="h-8 w-8 text-primary"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -93,10 +103,10 @@ const services = [
   {
     title: "Cloud Solutions",
     description:
-      "Leverage the power of cloud computing with AWS, Azure, or Google Cloud. We handle migration, deployment, scaling, and ongoing management.",
+      "AWS, Azure, or GCP migrations, IaC, scaling, and observability—production posture without slowing delivery.",
     icon: (
       <svg
-        className="w-8 h-8 text-white"
+        className="h-8 w-8 text-primary"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -113,10 +123,10 @@ const services = [
   {
     title: "E-Commerce Development",
     description:
-      "Build robust online stores with seamless payment integration, inventory management, and customer relationship tools to grow your business.",
+      "Composable storefronts, payments, inventory, and lifecycle hooks—optimized for conversion and operations.",
     icon: (
       <svg
-        className="w-8 h-8 text-white"
+        className="h-8 w-8 text-primary"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -130,116 +140,42 @@ const services = [
       </svg>
     ),
   },
-  {
-    title: "Brand Strategy",
-    description:
-      "Develop a strong brand identity that resonates with your audience. From logo design to brand guidelines, we create cohesive visual systems.",
-    icon: (
-      <svg
-        className="w-8 h-8 text-white"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Consulting & Strategy",
-    description:
-      "Get expert guidance on technology decisions, digital transformation, and business strategy. We help you navigate complex technical challenges.",
-    icon: (
-      <svg
-        className="w-8 h-8 text-white"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Maintenance & Support",
-    description:
-      "Keep your digital products running smoothly with our ongoing maintenance and technical support services. We're here when you need us.",
-    icon: (
-      <svg
-        className="w-8 h-8 text-white"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-      </svg>
-    ),
-  },
+];
 
+const whyChoose = [
   {
-    title: "Courses & Training",
-    description:
-      "Empower your team with our tailored training programs and workshops on the latest technologies and best practices in the digital landscape.",
-    icon: (
-      <svg
-        className="w-8 h-8 text-white"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 14l9-5-9-5-9 5 9 5z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 14l6.16-3.422A12.083 12.083 0 0121 13.5c0 1.657-4.03 3-9 3s-9-1.343-9-3a12.083 12.083 0 012.84-2.922L12 14z"
-        />
-      </svg>
-    ),
+    title: "Expert team",
+    body: "Senior designers and engineers who've shipped under real constraints—not slide decks.",
+    Icon: Users,
+  },
+  {
+    title: "Proven process",
+    body: "Weekly demos, tight feedback loops, and docs your team can inherit after handoff.",
+    Icon: Workflow,
+  },
+  {
+    title: "Long-term support",
+    body: "Roadmap pairing, fixes, and iteration blocks when you need capacity without a full hire.",
+    Icon: Headphones,
   },
 ];
 
 export default function ServicesPage() {
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="min-h-screen bg-surface-page">
       <PageHeader
+        variant="services"
         subtitle="Our Services"
         title="Comprehensive Digital Solutions"
-        description="We offer a full spectrum of digital services to help your business succeed in the modern digital landscape."
+        description="We offer a focused set of services to design, build, launch, and grow digital products—with clarity at every step."
       />
 
-      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24">
+      <div className="page-shell py-10 md:py-12">
         <AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => (
               <ServiceCard
-                key={index}
+                key={service.title}
                 title={service.title}
                 description={service.description}
                 icon={service.icon}
@@ -250,104 +186,47 @@ export default function ServicesPage() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.2} className="mt-20">
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-lg">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="rounded-3xl bg-white p-8 shadow-lg md:p-12">
+            <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
               <div>
-                <h2 className="font-jakarta font-bold text-3xl md:text-4xl text-black mb-6">
-                  Why Choose Us?
+                <h2 className="mb-6 font-jakarta text-3xl font-bold text-text-heading md:text-4xl">
+                  Why choose us?
                 </h2>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mt-1">
-                      <svg
-                        className="w-5 h-5 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                <div className="space-y-6">
+                  {whyChoose.map(({ title, body, Icon }) => (
+                    <div key={title} className="flex gap-4">
+                      <div
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary text-white shadow-md ring-2 ring-primary/25"
+                        aria-hidden
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
+                        <Icon className="h-6 w-6" strokeWidth={2} />
+                      </div>
+                      <div>
+                        <h3 className="mb-1 font-jakarta text-lg font-semibold text-text-heading">
+                          {title}
+                        </h3>
+                        <p className="text-sm leading-relaxed text-text-body">
+                          {body}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-lg text-black mb-1">
-                        Expert Team
-                      </h3>
-                      <p className="text-gray-500">
-                        Our team consists of experienced professionals
-                        passionate about delivering excellence.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mt-1">
-                      <svg
-                        className="w-5 h-5 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg text-black mb-1">
-                        Proven Process
-                      </h3>
-                      <p className="text-gray-500">
-                        We follow industry best practices to ensure quality and
-                        timely delivery.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mt-1">
-                      <svg
-                        className="w-5 h-5 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg text-black mb-1">
-                        Long-term Support
-                      </h3>
-                      <p className="text-gray-500">
-                        We&apos;re committed to your success beyond project
-                        delivery.
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-primary to-[#0d5a0d] rounded-2xl p-8 text-white">
-                <h3 className="font-jakarta font-bold text-2xl mb-4">
-                  Ready to Get Started?
+              <div className="surface-green-diagonal rounded-2xl p-8">
+                <h3 className="font-jakarta mb-4 text-2xl font-bold">
+                  Ready to get started?
                 </h3>
-                <p className="mb-6 opacity-90">
-                  Let&apos;s discuss how we can help transform your business
-                  with our digital solutions.
+                <p className="mb-6">
+                  Tell us what you&apos;re building—we&apos;ll reply with
+                  timeline, approach, and a sane commercial outline.
                 </p>
-                <button className="bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition-all">
-                  Schedule a Consultation
-                </button>
+                <Link
+                  href="/contact"
+                  className="inline-flex rounded-full bg-white px-8 py-3 font-bold text-primary no-underline transition-all hover:bg-white/95"
+                >
+                  Schedule a consultation
+                </Link>
               </div>
             </div>
           </div>

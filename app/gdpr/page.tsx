@@ -1,17 +1,25 @@
+import type { Metadata } from "next";
 import PageHeader from "@/components/Resuable/PageHeader";
 import AnimatedSection from "@/components/Resuable/AnimatedSection";
 import Footer from "@/components/Homepage/Footer";
+import { SITE_NAME } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "GDPR",
+  description: `How ${SITE_NAME} handles personal data under the GDPR.`,
+};
 
 export default function GDPRPage() {
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="bg-surface-page min-h-screen">
       <PageHeader
+        variant="legal"
         subtitle="GDPR Compliance"
         title="General Data Protection Regulation"
         description="Our commitment to protecting your data rights under GDPR."
       />
 
-      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24">
+      <div className="page-shell py-10 md:py-12">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm space-y-8">
@@ -24,7 +32,7 @@ export default function GDPRPage() {
                   Our GDPR Commitment
                 </h2>
                 <p className="text-gray-500 leading-relaxed">
-                  Convolution Labs is committed to protecting and respecting
+                  Northsphere Studio is committed to protecting and respecting
                   your privacy in accordance with the General Data Protection
                   Regulation (GDPR) and other applicable data protection laws.
                   We ensure that your personal data is processed lawfully,
@@ -123,7 +131,7 @@ export default function GDPRPage() {
                 <ol className="list-decimal list-inside text-gray-500 space-y-2 ml-4">
                   <li>
                     Send an email to our Data Protection Officer at
-                    dpo@convolutionlabs.com
+                    dpo@northsphere.studio
                   </li>
                   <li>Clearly state which right you wish to exercise</li>
                   <li>
@@ -198,7 +206,7 @@ export default function GDPRPage() {
                 </p>
                 <div className="mt-4 p-6 bg-gray-50 rounded-xl">
                   <p className="text-gray-700">
-                    <strong>Email:</strong> dpo@convolutionlabs.com
+                    <strong>Email:</strong> dpo@northsphere.studio
                   </p>
                   <p className="text-gray-700 mt-2">
                     <strong>Address:</strong> 123 Innovation Street, Tech

@@ -1,37 +1,53 @@
 import Image from "next/image";
-import Button from "../Resuable/Button";
+import Link from "next/link";
 
 const Banner = () => {
   return (
-    <div className="px-4 sm:px-8 md:px-12 lg:px-20">
-      <div className="relative w-full p-4 sm:p-6 md:p-8 lg:p-10 min-h-40 sm:min-h-[180px] md:min-h-[200px] lg:h-[235px] bg-[#0F660F] flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 rounded-[20px] sm:rounded-[25px] md:rounded-[30px] overflow-hidden">
-        <span className="z-10 text-white font-semibold tracking-tighter text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-[80px] leading-[130%] text-center sm:text-left">
-          Ready to work with us
-        </span>
-        <Button
-          label="Get Started"
-          variant="secondary"
-          className="bg-white z-10 text-sm sm:text-base shrink-0"
-          type="button"
-          icon=""
-          iconPosition="left"
+    <section className="section-inner flex w-full flex-col justify-center">
+      <div className="relative isolate flex min-h-[220px] w-full flex-col justify-center overflow-hidden rounded-2xl border border-stroke shadow-md sm:min-h-[260px] sm:rounded-3xl md:min-h-[280px]">
+        <div className="absolute inset-0 bg-primary" aria-hidden />
+        <Image
+          src="/bg.svg"
+          alt=""
+          width={480}
+          height={480}
+          className="pointer-events-none absolute -left-24 bottom-0 h-[130%] w-auto opacity-[0.14]"
         />
         <Image
-          src="/bg.png"
-          alt="Banner Background Image"
-          width={300}
-          height={200}
-          className="absolute h-[600px] sm:h-[800px] md:h-[1000px] w-auto rotate-50 opacity-50"
+          src="/black-bg.png"
+          alt=""
+          fill
+          className="pointer-events-none object-cover brightness-[0.45]"
+          sizes="100vw"
         />
-        <Image
-          src="/bgNoise.png"
-          alt="Banner Background Image"
-          width={300}
-          height={200}
-          className="absolute w-full h-full left-0 z-0 opacity-10"
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/55 via-primary/[0.93] to-primary"
+          aria-hidden
         />
+        <div
+          className="artifact-float pointer-events-none absolute -right-16 top-1/2 h-48 w-48 -translate-y-1/2 rounded-full bg-white/10 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="relative z-10 flex min-h-[inherit] flex-col items-center justify-center gap-8 px-6 py-10 sm:flex-row sm:gap-10 sm:px-10 sm:py-12 md:px-12">
+          <div className="max-w-xl text-center sm:flex-1 sm:text-left">
+            <h2 className="font-jakarta text-2xl font-semibold leading-tight tracking-tight text-white opacity-100 banner-title-shadow sm:text-3xl md:text-4xl">
+              Ready to plan your next release?
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-white opacity-100 banner-text-shadow sm:text-base md:text-lg">
+              Tell us what you&apos;re building—we&apos;ll reply with clear next
+              steps.
+            </p>
+          </div>
+          <Link
+            href="/contact"
+            className="inline-flex shrink-0 items-center justify-center rounded-full bg-white px-8 py-3 font-manrope text-sm font-bold text-primary shadow-lg hover:bg-white/95 sm:px-10 sm:text-base"
+          >
+            Get started
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,264 +1,235 @@
-"use client";
-import PageHeader from "@/components/Resuable/PageHeader";
-import AnimatedSection from "@/components/Resuable/AnimatedSection";
-import Footer from "@/components/Homepage/Footer";
-import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
+import PageHeader from "@/components/Resuable/PageHeader";
+import Footer from "@/components/Homepage/Footer";
+import { SectionArtifacts } from "@/components/Resuable/SectionArtifacts";
+import { visual } from "@/lib/visuals";
 
-const timelineData = [
+const milestones = [
   {
-    year: "2023",
-    title: "Company Founded",
-    description:
-      "Started with a vision to transform businesses through innovative digital solutions.",
+    year: "2018",
+    title: "Studio formed",
+    body: "Started as a small product design practice focused on shipping usable interfaces.",
+  },
+  {
+    year: "2020",
+    title: "Engineering bench",
+    body: "Added full-stack delivery—design systems, APIs, and observability from day one.",
   },
   {
     year: "2023",
-    title: "First Major Client",
-    description:
-      "Delivered our first enterprise-level project, setting the foundation for future success.",
+    title: "Growth partnerships",
+    body: "Paired lifecycle marketing with product work so launches had measurable funnels.",
   },
   {
-    year: "2023",
-    title: "Team Expansion",
-    description:
-      "Grew our team to 25+ talented professionals across multiple disciplines.",
-  },
-
-  {
-    year: "2024",
-    title: "Growing our Portfolio",
-    description:
-      "Recognized as a leading digital innovation company in the industry.",
-  },
-  {
-    year: "2025",
-    title: "Continued Growth",
-    description:
-      "Serving 230+ satisfied clients with cutting-edge digital solutions.",
+    year: "2026",
+    title: "Remote-first collective",
+    body: "Distributed team across time zones with shared rituals and async-first documentation.",
   },
 ];
 
-const values = [
+const principles = [
   {
-    title: "Innovation",
-    description: "We constantly push boundaries and embrace new technologies.",
-    icon: "💡",
+    title: "Clarity over noise",
+    body: "We write decisions down, prototype early, and cut scope that does not move a KPI.",
   },
   {
-    title: "Quality",
-    description: "Excellence is at the core of everything we deliver.",
-    icon: "⭐",
+    title: "Accessible by default",
+    body: "Contrast, focus order, and semantics are part of the first review—not a late audit.",
   },
   {
-    title: "Integrity",
-    description:
-      "We build trust through transparency and honest communication.",
-    icon: "🤝",
+    title: "Long-term ownership",
+    body: "Handoffs include runbooks, owners, and rollback paths so your team can operate without us.",
   },
   {
-    title: "Collaboration",
-    description: "Success comes from working together with our clients.",
-    icon: "🤜🤛",
+    title: "Honest timelines",
+    body: "We model risk explicitly and reserve buffer for integration realities, not wishful thinking.",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="min-h-screen bg-surface-page">
       <PageHeader
-        subtitle="About Us"
-        title="Building Digital Excellence Since 2018"
-        description="We are a team of passionate innovators dedicated to transforming businesses through cutting-edge digital solutions."
+        variant="about"
+        subtitle="About"
+        title="A studio for serious product work"
+        description="Northsphere Studio combines strategy, interface craft, and engineering discipline—so launches feel inevitable, not improvised."
       />
 
-      {/* Company Overview */}
-      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24">
-        <AnimatedSection>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
-            <div>
-              <h2 className="font-jakarta font-bold text-4xl md:text-5xl text-black mb-6">
-                Who We Are
+      <main className="page-shell space-y-16 py-10 md:space-y-20 md:py-14">
+        {/* Intro + portrait */}
+        <section className="relative overflow-hidden rounded-3xl border border-stroke bg-surface-card">
+          <SectionArtifacts subtle />
+          <div className="relative z-10 grid gap-10 p-8 md:grid-cols-2 md:gap-12 md:p-12 lg:p-14">
+            <div className="flex flex-col justify-center gap-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                Who we are
+              </p>
+              <h2 className="font-jakarta text-3xl font-bold tracking-tight text-text-heading md:text-4xl">
+                Small team. High standards. No theatre.
               </h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-6">
-                Convolution Labs is a forward-thinking digital agency
-                specializing in web development, mobile applications, and
-                digital marketing. We combine creativity with technical
-                expertise to deliver solutions that drive real business results.
+              <p className="text-base leading-relaxed text-text-body md:text-lg">
+                We work with product leads, founders, and marketing owners who need
+                interfaces that survive real traffic, and roadmaps that survive
+                scrutiny. Most engagements blend UX, front-end, and light backend
+                work—with experiments you can read in analytics.
               </p>
-              <p className="text-gray-500 text-lg leading-relaxed mb-6">
-                Founded in 2018, we&apos;ve grown from a small startup to a
-                trusted partner for businesses worldwide. Our team of 50+
-                experts brings together diverse skills and perspectives to solve
-                complex challenges.
-              </p>
-              <div className="grid grid-cols-3 gap-6 mt-8">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">
-                    50+
-                  </div>
-                  <div className="text-sm text-gray-500">Happy Clients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">
-                    60+
-                  </div>
-                  <div className="text-sm text-gray-500">Projects Done</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">
-                    15+
-                  </div>
-                  <div className="text-sm text-gray-500">Team Members</div>
-                </div>
-              </div>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative h-[500px] rounded-3xl overflow-hidden bg-primary"
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-white text-center p-8">
-                  <h3 className="text-3xl font-bold mb-4">Our Mission</h3>
-                  <p className="text-lg opacity-90">
-                    To empower businesses with innovative digital solutions that
-                    drive growth and create lasting impact.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </AnimatedSection>
-
-        {/* Mission, Vision, Values */}
-        <AnimatedSection delay={0.2}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-            <motion.div
-              whileHover={{ y: -8 }}
-              className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all"
-            >
-              {/* <div className="w-16 h-16 bg-primary bg-opacity-10 rounded-xl flex items-center justify-center mb-6">
-                <span className="text-4xl">🎯</span>
-              </div> */}
-              <h3 className="font-jakarta font-bold text-2xl text-black mb-4">
-                Our Mission
-              </h3>
-              <p className="text-gray-500 leading-relaxed">
-                To deliver exceptional digital experiences that transform
-                businesses and exceed expectations. We strive to be the trusted
-                partner that empowers organizations to achieve their digital
-                ambitions.
-              </p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -8 }}
-              className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all"
-            >
-              {/* <div className="w-16 h-16 bg-primary bg-opacity-10 rounded-xl flex items-center justify-center mb-6">
-                <span className="text-4xl">🔭</span>
-              </div> */}
-              <h3 className="font-jakarta font-bold text-2xl text-black mb-4">
-                Our Vision
-              </h3>
-              <p className="text-gray-500 leading-relaxed">
-                To be the world&apos;s most innovative digital solutions
-                provider, recognized for excellence, creativity, and impact. We
-                envision a future where technology seamlessly integrates with
-                business to create extraordinary value.
-              </p>
-            </motion.div>
-          </div>
-        </AnimatedSection>
-
-        {/* Core Values */}
-        <AnimatedSection delay={0.3}>
-          <div className="mb-24">
-            <h2 className="font-jakarta font-bold text-4xl md:text-5xl text-black text-center mb-12">
-              Our Core Values
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {values.map((value, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all text-center"
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex rounded-full bg-primary px-6 py-3 font-manrope text-sm font-bold text-white hover:bg-primary-hover"
                 >
-                  <div className="text-5xl mb-4">{value.icon}</div>
-                  <h3 className="font-jakarta font-bold text-xl text-black mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm">{value.description}</p>
-                </motion.div>
-              ))}
+                  Start a conversation
+                </Link>
+                <Link
+                  href="/services"
+                  className="inline-flex rounded-full border border-stroke bg-surface-page px-6 py-3 font-manrope text-sm font-bold text-text-heading hover:border-primary hover:text-primary"
+                >
+                  Capabilities
+                </Link>
+              </div>
+            </div>
+            <div className="relative min-h-[280px] overflow-hidden rounded-2xl border border-stroke md:min-h-[360px]">
+              <Image
+                src={visual.workspace}
+                alt=""
+                fill
+                className="object-cover brightness-[0.92]"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface-dark/55 to-transparent" />
+              <p className="absolute bottom-6 left-6 right-6 font-jakarta text-sm font-medium text-white banner-text-shadow md:text-base">
+                Workshop-style collaboration: async notes, shared Figma, and a
+                single source of truth for scope.
+              </p>
             </div>
           </div>
-        </AnimatedSection>
+        </section>
+
+        {/* Stats */}
+        <section className="surface-green rounded-3xl px-8 py-10 md:px-12 md:py-12">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-6">
+            {[
+              { n: "40+", l: "Shipped initiatives" },
+              { n: "12", l: "Countries & time zones" },
+              { n: "8yr", l: "Average seniority" },
+              { n: "24h", l: "First response SLA" },
+            ].map((s) => (
+              <div key={s.l} className="text-center md:text-left">
+                <p className="font-jakarta text-4xl font-bold text-white md:text-5xl">
+                  {s.n}
+                </p>
+                <p className="mt-2 text-sm text-white/95">{s.l}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Principles */}
+        <section>
+          <div className="mb-10 max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              Principles
+            </p>
+            <h2 className="mt-3 font-jakarta text-3xl font-bold text-text-heading md:text-4xl">
+              How we decide when trade-offs appear
+            </h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {principles.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-2xl border border-stroke bg-surface-card p-8 shadow-sm"
+              >
+                <h3 className="font-jakarta text-xl font-bold text-text-heading">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-text-body md:text-base">
+                  {item.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
 
         {/* Timeline */}
-        <AnimatedSection delay={0.4}>
-          <div>
-            <h2 className="font-jakarta font-bold text-4xl md:text-5xl text-black text-center mb-16">
-              Our Journey
-            </h2>
-            <div className="max-w-4xl mx-auto">
-              {timelineData.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative pl-8 pb-12 border-l-2 border-primary border-opacity-20 last:pb-0"
-                >
-                  <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary"></div>
-                  <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-shadow">
-                    <div className="text-primary font-bold text-lg mb-2">
-                      {item.year}
-                    </div>
-                    <h3 className="font-jakarta font-bold text-xl text-black mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-500">{item.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </AnimatedSection>
+        <section className="rounded-3xl border border-stroke bg-surface-muted/80 p-8 md:p-12">
+          <h2 className="text-center font-jakarta text-3xl font-bold text-text-heading md:text-4xl">
+            Milestones
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-text-body">
+            Not a vanity timeline—just how the practice evolved as clients asked
+            for deeper technical partnership.
+          </p>
+          <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {milestones.map((m) => (
+              <li key={m.year}>
+                <span className="font-jakarta text-sm font-bold text-primary">
+                  {m.year}
+                </span>
+                <h3 className="mt-2 font-jakarta text-lg font-bold text-text-heading">
+                  {m.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-body">
+                  {m.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
 
-        {/* CTA Section */}
-        <AnimatedSection delay={0.5} className="mt-24">
-          <div className="bg-gradient-to-br from-primary to-[#0d5a0d] text-white rounded-3xl p-12 md:p-16 text-center">
-            <h2 className="font-jakarta font-bold text-3xl md:text-5xl mb-6">
-              Join Us on Our Journey
-            </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Whether you're looking to transform your business or join our
-              team, we'd love to hear from you.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <button className="bg-white text-primary px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition-all">
-                  Work With Us
-                </button>
-              </Link>
-              <Link href="/careers">
-                <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-primary transition-all">
-                  Join Our Team
-                </button>
-              </Link>
+        {/* Mission strip */}
+        <section className="surface-green overflow-hidden rounded-3xl">
+          <div className="grid gap-10 p-10 md:grid-cols-2 md:items-center md:gap-14 md:p-14">
+            <div>
+              <h2 className="font-jakarta text-2xl font-bold text-white md:text-3xl">
+                Mission
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-white md:text-lg">
+                Help teams ship digital products that stay maintainable, measurable,
+                and honest about what they can prove in market—then iterate with
+                evidence.
+              </p>
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/20">
+              <Image
+                src={visual.dashboardUi}
+                alt=""
+                fill
+                className="object-cover brightness-[0.55]"
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+              <div className="absolute inset-0 bg-primary/35" />
             </div>
           </div>
-        </AnimatedSection>
-      </div>
+        </section>
+
+        {/* CTA */}
+        <section className="surface-green rounded-3xl px-8 py-12 text-center md:px-16 md:py-16">
+          <h2 className="font-jakarta text-3xl font-bold text-white md:text-4xl">
+            Work with us
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-white md:text-lg">
+            Share a brief, a deck, or a messy backlog—we&apos;ll respond with a
+            sensible next step.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href="/contact"
+              className="inline-flex rounded-full bg-white px-8 py-4 font-manrope font-bold text-primary hover:bg-white/95"
+            >
+              Contact
+            </Link>
+            <Link
+              href="/careers"
+              className="inline-flex rounded-full border-2 border-white px-8 py-4 font-manrope font-bold text-white hover:bg-white/10"
+            >
+              Careers
+            </Link>
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </div>

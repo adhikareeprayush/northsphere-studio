@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import Button from "../Resuable/Button";
 
 const Faqs = () => {
   const [expandedIndex, setExpandedIndex] = useState(0);
@@ -35,63 +34,63 @@ const Faqs = () => {
   ];
 
   return (
-    <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-10 sm:py-14 md:py-20">
-      <div className="bg-white grid lg:grid-cols-2 grid-cols-1 p-4 sm:p-6 md:p-8 gap-8 sm:gap-12 md:gap-16 lg:gap-20 rounded-[20px] sm:rounded-[25px] md:rounded-[30px]">
-        <div className="flex flex-col gap-6 sm:gap-8 lg:gap-12 col-span-1">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-gray-600 font-jakarta font-semibold leading-[130%] tracking-tighter">
-            Digital Marketing FAQs
+    <section className="section-inner py-12 md:py-14">
+      <div className="card-surface grid grid-cols-1 gap-12 p-8 md:grid-cols-2 md:gap-16 md:p-12 lg:p-14">
+        <div className="flex flex-col gap-8">
+          <h2 className="font-jakarta text-3xl font-semibold tracking-tight text-text-heading sm:text-4xl md:text-5xl md:leading-tight">
+            Frequently asked questions
           </h2>
-          <p className="text-sm sm:text-base font-jakarta leading-[180^%] font-medium">
-            As a leading digital marketing agency, we are dedicated to providing
-            comprehensive educational resources and answering frequently asked
-            questions to help our clients.
+          <p className="max-w-md text-base leading-relaxed text-text-body">
+            Straight answers about how we work, what we deliver, and how we
+            report progress—before you get on a call.
           </p>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-            <Button
-              label="More Questions"
-              type="button"
-              variant="outline"
-              icon={null}
-              iconPosition="left"
-            />
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
-              href={"/contact"}
-              className="text-primary text-sm sm:text-base font-medium underline"
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-primary bg-transparent px-8 py-4 font-jakarta text-base font-bold text-primary hover:bg-surface-muted"
             >
-              Contact Us
+              Ask us anything
+            </Link>
+            <Link
+              href="/services"
+              className="text-sm font-semibold text-primary underline-offset-4 hover:underline sm:text-base"
+            >
+              Browse services
             </Link>
           </div>
         </div>
-        <div className="col-span-1">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`flex flex-col h-auto gap-4 sm:gap-6 md:gap-8 border-t-2 py-3 sm:py-4 ${
-                index === faqs.length - 1 ? "border-b-2" : ""
-              }`}
-            >
-              <div className="flex items-center gap-2 w-full justify-between">
-                <h4 className="text-primary leading-[150%] tracking-tighter font-semibold text-base sm:text-lg md:text-xl lg:text-2xl">
-                  {faq.question}
-                </h4>
+        <div className="flex flex-col">
+          {faqs.map((faq, index) => {
+            const open = expandedIndex === index;
+            return (
+              <div
+                key={faq.question}
+                className="border-t border-stroke first:border-t-0"
+              >
                 <button
-                  className="cursor-pointer text-2xl sm:text-3xl md:text-4xl font-light leading-none flex-shrink-0"
-                  aria-label="Expand FAQ"
-                  onClick={() =>
-                    setExpandedIndex(expandedIndex === index ? -1 : index)
-                  }
+                  type="button"
+                  className="flex w-full items-start justify-between gap-4 py-5 text-left"
+                  aria-expanded={open}
+                  onClick={() => setExpandedIndex(open ? -1 : index)}
                 >
-                  {expandedIndex === index ? "-" : "+"}
+                  <span className="font-jakarta text-base font-semibold leading-snug text-text-heading sm:text-lg">
+                    {faq.question}
+                  </span>
+                  <span className="shrink-0 text-2xl leading-none text-text-body">
+                    {open ? "−" : "+"}
+                  </span>
                 </button>
+                {open && (
+                  <p className="pb-5 text-sm leading-relaxed text-text-body sm:text-base">
+                    {faq.answer}
+                  </p>
+                )}
               </div>
-              {expandedIndex === index && (
-                <p className="text-sm sm:text-base">{faq.answer}</p>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

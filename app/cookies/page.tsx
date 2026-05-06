@@ -1,17 +1,25 @@
+import type { Metadata } from "next";
 import PageHeader from "@/components/Resuable/PageHeader";
 import AnimatedSection from "@/components/Resuable/AnimatedSection";
 import Footer from "@/components/Homepage/Footer";
+import { SITE_NAME } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Cookie Policy",
+  description: `Cookie and tracking disclosures for ${SITE_NAME}.`,
+};
 
 export default function CookiePolicyPage() {
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="bg-surface-page min-h-screen">
       <PageHeader
+        variant="legal"
         subtitle="Cookie Policy"
         title="How We Use Cookies"
         description="Learn about the cookies we use and how you can control them."
       />
 
-      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24">
+      <div className="page-shell py-10 md:py-12">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm space-y-8">
@@ -177,7 +185,7 @@ export default function CookiePolicyPage() {
                 </p>
                 <div className="mt-4 p-6 bg-gray-50 rounded-xl">
                   <p className="text-gray-700">
-                    <strong>Email:</strong> privacy@convolutionlabs.com
+                    <strong>Email:</strong> privacy@northsphere.studio
                   </p>
                 </div>
               </div>

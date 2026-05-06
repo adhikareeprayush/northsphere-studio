@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/public/logo.png";
+import NewsletterSignup from "@/components/Homepage/NewsletterSignup";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const navigationLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Products", href: "/products" },
+  { label: "Projects", href: "/products" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
   { label: "Careers", href: "/careers" },
 ];
@@ -20,11 +22,11 @@ const licenseLinks = [
 
 const contactLinks = [
   {
-    label: "contact@convolutionlab.com",
-    href: "mailto:contact@convolutionlab.com",
+    label: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
   },
   { label: "+977 9700045699", href: "tel:+9779700045699" },
-  { label: "Dhangadi-5, kailali, Nepal", href: "#" },
+  { label: "Distributed · Remote-first", href: "#" },
 ];
 
 const socialLinks = [
@@ -60,7 +62,7 @@ const socialLinks = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/convolutionlabs/",
+    href: "https://www.instagram.com/",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +77,7 @@ const socialLinks = [
   },
   {
     label: "GitHub",
-    href: "https://github.com/convolutionlabs107",
+    href: "https://github.com/",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +94,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden mt-16 md:mt-24 lg:mt-32">
+    <footer className="relative mt-10 overflow-hidden border-t border-stroke bg-surface-card md:mt-14">
       {/* Background Noise */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"
@@ -101,25 +103,25 @@ const Footer = () => {
 
       <div className="relative z-10">
         {/* Main Footer Content */}
-        <div className="px-4 sm:px-8 md:px-12 lg:px-20 pt-16 md:pt-20 pb-10">
+        <div className="page-shell pt-12 pb-8 md:pt-14 md:pb-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
             {/* Company Info */}
             <div className="lg:col-span-1">
               <Link href="/" className="flex items-center gap-3 mb-6">
                 <Image
-                  src={logo}
-                  alt="Convolution Labs Logo"
+                  src="/logo.svg"
+                  alt=""
                   width={44}
                   height={44}
+                  className="h-10 w-10"
                 />
-                <h3 className="font-manrope font-bold text-xl sm:text-2xl text-black">
-                  Convolution Labs
+                <h3 className="font-manrope font-bold text-xl sm:text-2xl text-text-heading">
+                  Northsphere Studio
                 </h3>
               </Link>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6 font-jakarta">
-                Convolution Labs is a forward-thinking technology company
-                specializing in web and mobile development, digital marketing,
-                STEM & robotics and UI/UX design.
+              <p className="mb-6 font-jakarta text-sm leading-relaxed text-text-body sm:text-base">
+                Northsphere Studio ships thoughtful interfaces, resilient web
+                apps, and growth programs anchored in measurable outcomes.
               </p>
               {/* Social Links */}
               <div className="flex items-center gap-4">
@@ -129,7 +131,7 @@ const Footer = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#EA5F38] hover:text-white transition-all duration-300"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-muted text-text-body transition-colors hover:bg-accent hover:text-white"
                     aria-label={social.label}
                   >
                     {social.icon}
@@ -140,7 +142,7 @@ const Footer = () => {
 
             {/* Navigation */}
             <div>
-              <h4 className="text-black font-jakarta font-semibold text-lg mb-6">
+              <h4 className="text-text-heading font-jakarta font-semibold text-lg mb-6">
                 Navigation
               </h4>
               <ul className="flex flex-col gap-4">
@@ -148,7 +150,7 @@ const Footer = () => {
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="text-gray-600 hover:text-[#EA5F38] transition-colors duration-300 text-sm sm:text-base font-jakarta"
+                      className="font-jakarta text-sm text-text-body transition-colors hover:text-accent sm:text-base"
                     >
                       {link.label}
                     </Link>
@@ -159,7 +161,7 @@ const Footer = () => {
 
             {/* License */}
             <div>
-              <h4 className="text-black font-jakarta font-semibold text-lg mb-6">
+              <h4 className="text-text-heading font-jakarta font-semibold text-lg mb-6">
                 License
               </h4>
               <ul className="flex flex-col gap-4">
@@ -167,7 +169,7 @@ const Footer = () => {
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="text-gray-600 hover:text-[#EA5F38] transition-colors duration-300 text-sm sm:text-base font-jakarta"
+                      className="font-jakarta text-sm text-text-body transition-colors hover:text-accent sm:text-base"
                     >
                       {link.label}
                     </Link>
@@ -178,7 +180,7 @@ const Footer = () => {
 
             {/* Contact */}
             <div>
-              <h4 className="text-black font-jakarta font-semibold text-lg mb-6">
+              <h4 className="text-text-heading font-jakarta font-semibold text-lg mb-6">
                 Contact
               </h4>
               <ul className="flex flex-col gap-4">
@@ -186,7 +188,7 @@ const Footer = () => {
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="text-gray-600 hover:text-[#EA5F38] transition-colors duration-300 text-sm sm:text-base font-jakarta"
+                      className="font-jakarta text-sm text-text-body transition-colors hover:text-accent sm:text-base"
                     >
                       {link.label}
                     </Link>
@@ -194,48 +196,34 @@ const Footer = () => {
                 ))}
               </ul>
               {/* Newsletter */}
-              <div className="mt-8">
-                <h5 className="text-black font-jakarta font-medium text-sm mb-3">
-                  Subscribe to our newsletter
-                </h5>
-                <div className="flex gap-2">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 bg-gray-100 border border-gray-200 rounded-full px-4 py-2.5 text-black text-sm placeholder:text-gray-400 focus:outline-none focus:border-[#EA5F38] transition-colors duration-300"
-                  />
-                  <button className="bg-[#EA5F38] hover:bg-[#d54f2d] text-white px-5 py-2.5 rounded-full font-manrope font-bold text-sm transition-colors duration-300 cursor-pointer">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
+              <NewsletterSignup />
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 px-4 sm:px-8 md:px-12 lg:px-20 py-6">
+        <div className="page-shell border-t border-stroke py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-gray-500 text-sm font-jakarta">
-              © {new Date().getFullYear()} Convolution Labs. All rights
+            <p className="font-jakarta text-sm text-text-body">
+              © {new Date().getFullYear()} Northsphere Studio. All rights
               reserved.
             </p>
             <div className="flex items-center gap-6">
               <Link
                 href="/privacy-policy"
-                className="text-gray-500 hover:text-[#EA5F38] text-sm font-jakarta transition-colors duration-300"
+                className="font-jakarta text-sm text-text-body transition-colors hover:text-accent"
               >
                 Privacy
               </Link>
               <Link
-                href="/terms-of-service"
-                className="text-gray-500 hover:text-[#EA5F38] text-sm font-jakarta transition-colors duration-300"
+                href="/terms"
+                className="font-jakarta text-sm text-text-body transition-colors hover:text-accent"
               >
                 Terms
               </Link>
               <Link
-                href="/sitemap"
-                className="text-gray-500 hover:text-[#EA5F38] text-sm font-jakarta transition-colors duration-300"
+                href="/site-map"
+                className="font-jakarta text-sm text-text-body transition-colors hover:text-accent"
               >
                 Sitemap
               </Link>

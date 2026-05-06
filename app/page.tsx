@@ -11,24 +11,24 @@ import AnimatedSection from "@/components/Resuable/AnimatedSection";
 
 export default function Home() {
   return (
-    <div className="bg-[#FAFAFA]">
+    <div className="min-h-screen bg-surface-page text-text-body">
       <Hero />
-      <AnimatedSection>
+      <AnimatedSection className="relative border-y border-stroke bg-surface-muted">
         <HowWeWork />
       </AnimatedSection>
-      <AnimatedSection delay={0.1}>
+      <AnimatedSection className="bg-surface-page">
         <Projects />
       </AnimatedSection>
-      <AnimatedSection delay={0.2}>
+      <AnimatedSection className="border-y border-stroke bg-surface-card">
         <Testimonials />
       </AnimatedSection>
-      <AnimatedSection delay={0.1}>
+      <AnimatedSection className="relative bg-surface-muted">
         <Faqs />
       </AnimatedSection>
-      <AnimatedSection delay={0.2}>
+      <AnimatedSection className="border-y border-stroke bg-surface-card">
         <Blog />
       </AnimatedSection>
-      <AnimatedSection delay={0.1}>
+      <AnimatedSection className="flex min-h-[min(42vh,380px)] flex-col justify-center bg-surface-page py-10 md:min-h-[min(40vh,420px)] md:py-12">
         <Banner />
       </AnimatedSection>
       <Footer />

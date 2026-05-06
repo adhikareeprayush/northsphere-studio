@@ -1,27 +1,26 @@
-import logo from "@/public/logo.png";
 import Image from "next/image";
 import Button from "./Button";
-import bell from "@/public/bell.svg";
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 
 const Nav = () => {
   return (
-    <div className="flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-20 py-4 sm:py-6 md:py-8.5">
-      <div className="flex items-center gap-4 sm:gap-8 md:gap-16 lg:gap-24">
+    <header className="sticky top-0 z-50 border-b border-stroke bg-surface-card/95 backdrop-blur-sm">
+      <div className="page-shell flex items-center justify-between py-3 sm:py-4">
+        <div className="flex items-center gap-4 sm:gap-8 md:gap-12 lg:gap-16">
         <Link className="flex items-center gap-2" href={"/"}>
           <Image
-            src={logo}
-            alt="Logo"
+            src="/logo.svg"
+            alt=""
             width={44}
             height={44}
-            className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11"
+            className="h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11"
           />
-          <h3 className="font-manrope font-bold text-lg sm:text-xl md:text-2xl text-black hidden sm:block">
-            Convolution Labs
+          <h3 className="hidden font-manrope text-lg font-bold text-text-heading sm:block sm:text-xl md:text-2xl">
+            Northsphere Studio
           </h3>
         </Link>
-        <ul className="hidden lg:flex items-center gap-8 text-black font-jakarta font-semibold text-sm">
+        <ul className="hidden items-center gap-6 font-jakarta text-sm font-semibold text-text-heading lg:flex xl:gap-8">
           <li>
             <Link href="/" className="hover:text-primary transition-colors">
               Home
@@ -52,6 +51,11 @@ const Nav = () => {
             </Link>
           </li>
           <li>
+            <Link href="/blog" className="hover:text-primary transition-colors">
+              Blog
+            </Link>
+          </li>
+          <li>
             <Link
               href="/contact"
               className="hover:text-primary transition-colors"
@@ -70,7 +74,7 @@ const Nav = () => {
             variant="secondary"
             icon={null}
             iconPosition="left"
-            className="hidden sm:flex py-1.5 sm:py-2 px-3 hover:bg-primary hover:text-white transform duration-500 ease-in-out transition-transform sm:px-4 md:px-6 font-manrope text-xs sm:text-sm md:text-base"
+            className="hidden py-2 font-manrope text-xs transition-colors hover:bg-primary hover:text-white sm:flex sm:px-4 sm:text-sm md:px-6 [&_img]:transition-[filter] hover:[&_img]:brightness-0 hover:[&_img]:invert"
           />
         </Link>
         {/* <Button
@@ -90,7 +94,8 @@ const Nav = () => {
         /> */}
         <MobileMenu />
       </div>
-    </div>
+      </div>
+    </header>
   );
 };
 

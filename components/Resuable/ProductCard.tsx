@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 type ProductCardProps = {
@@ -17,52 +16,36 @@ const ProductCard = ({
   image,
   price,
   category,
-  index = 0,
 }: ProductCardProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group"
-    >
-      <div className="relative h-64 bg-linear-to-br from-[#F0F0F0] to-[#E5E5E5] overflow-hidden">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.4 }}
-          className="w-full h-full"
-        >
-          <Image src={image} alt={title} fill className="object-cover" />
-        </motion.div>
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-stroke bg-surface-card shadow-sm transition-shadow hover:shadow-md">
+      <div className="relative aspect-[16/10] w-full shrink-0 bg-surface-muted">
+        <Image src={image} alt="" fill className="object-cover" sizes="(max-width:768px) 100vw, 33vw" />
         {category && (
-          <div className="absolute top-4 left-4 ">
-            <span className="bg-primary group-hover:bg-orange-400 text-white px-4 py-1.5 rounded-full text-xs font-semibold">
+          <div className="absolute left-4 top-4">
+            <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
               {category}
             </span>
           </div>
         )}
       </div>
-      <div className="p-6">
-        <h3 className="font-jakarta font-bold text-xl text-black mb-2 group-hover:text-primary transition-colors duration-300">
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="mb-2 font-jakarta text-xl font-bold text-text-heading group-hover:text-primary">
           {title}
         </h3>
-        <p className="text-gray-500 text-sm mb-4 line-clamp-2">{description}</p>
+        <p className="mb-4 line-clamp-3 flex-1 text-sm leading-relaxed text-text-body">
+          {description}
+        </p>
         {price && (
-          <div className="flex items-center justify-between">
+          <div className="mt-auto flex items-center justify-between border-t border-stroke pt-4">
             <span className="text-2xl font-bold text-primary">{price}</span>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all"
-            >
+            <span className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white">
               Visit
-            </motion.button>
+            </span>
           </div>
         )}
       </div>
-    </motion.div>
+    </article>
   );
 };
 

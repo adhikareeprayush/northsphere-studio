@@ -4,6 +4,7 @@ import AnimatedSection from "@/components/Resuable/AnimatedSection";
 import Footer from "@/components/Homepage/Footer";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Link from "next/link";
 
 const jobOpenings = [
   {
@@ -96,14 +97,15 @@ export default function CareersPage() {
   const [selectedJob, setSelectedJob] = useState<number | null>(null);
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="bg-surface-page min-h-screen">
       <PageHeader
+        variant="careers"
         subtitle="Careers"
         title="Join Our Team"
         description="Build the future of digital innovation with us. Explore open positions and find your next opportunity."
       />
 
-      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24">
+      <div className="page-shell py-10 md:py-12">
         {/* Why Join Us */}
         <AnimatedSection>
           <div className="mb-20">
@@ -284,13 +286,12 @@ export default function CareersPage() {
                           </ul>
                         </div>
                         <div className="pt-4">
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all"
+                          <Link
+                            href={`/contact?subject=${encodeURIComponent(`Application: ${job.title}`)}`}
+                            className="inline-block bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all"
                           >
                             Apply Now
-                          </motion.button>
+                          </Link>
                         </div>
                       </div>
                     </motion.div>
@@ -393,21 +394,20 @@ export default function CareersPage() {
 
         {/* CTA */}
         <AnimatedSection delay={0.4} className="mt-20">
-          <div className="bg-gradient-to-br from-primary to-[#0d5a0d] text-white rounded-3xl p-12 md:p-16 text-center">
-            <h2 className="font-jakarta font-bold text-3xl md:text-4xl mb-6">
+          <div className="surface-green rounded-3xl p-12 text-center md:p-16">
+            <h2 className="font-jakarta mb-6 text-3xl font-bold md:text-4xl">
               Don&apos;t See Your Role?
             </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+            <p className="mx-auto mb-8 max-w-2xl text-xl">
               We&apos;re always looking for talented people. Send us your resume
               and let us know how you can contribute to our team.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-primary px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition-all"
+            <Link
+              href="/contact?subject=General%20application"
+              className="inline-block rounded-full bg-white px-8 py-4 font-bold text-primary no-underline transition-all hover:bg-white/95"
             >
               Send Your Resume
-            </motion.button>
+            </Link>
           </div>
         </AnimatedSection>
       </div>

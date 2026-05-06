@@ -21,11 +21,11 @@ const Button = ({
   onClick,
 }: ButtonProps) => {
   const baseStyles =
-    "px-8 py-4 rounded-full font-bold font-jakarta text-base flex items-center justify-between gap-8 cursor-pointer";
+    "px-8 py-4 rounded-full font-bold font-jakarta text-base flex items-center justify-between gap-8 cursor-pointer transition-colors";
   const variantStyles =
     variant === "primary"
-      ? "bg-primary text-white"
-      : "bg-transparent border-1 border-primary text-primary";
+      ? "bg-primary text-white hover:bg-primary-hover [&_img]:brightness-0 [&_img]:invert [&_img]:opacity-100"
+      : "border border-primary bg-transparent text-primary hover:bg-primary hover:text-white hover:border-primary [&_img]:transition-[filter] hover:[&_img]:brightness-0 hover:[&_img]:invert";
   const combinedStyles = twMerge(baseStyles, variantStyles, className);
 
   return (

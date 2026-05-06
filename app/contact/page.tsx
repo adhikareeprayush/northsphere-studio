@@ -1,12 +1,14 @@
 "use client";
-import { useState } from "react";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Mail, Phone, MapPin } from "lucide-react";
 import PageHeader from "@/components/Resuable/PageHeader";
 import AnimatedSection from "@/components/Resuable/AnimatedSection";
 import Footer from "@/components/Homepage/Footer";
 import { motion } from "framer-motion";
+import { CONTACT_EMAIL, getFormSubmitContactUrl } from "@/lib/site";
 
-export default function ContactPage() {
+function ContactPageInner() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,17 +28,17 @@ export default function ContactPage() {
     "idle" | "success" | "error"
   >("idle");
 
-  // Replace this with your actual Google Form URL
-  const GOOGLE_FORM_ACTION_URL =
-    "https://docs.google.com/forms/u/0/d/e/YOUR_FORM_ID/formResponse";
+  const searchParams = useSearchParams();
 
-  // Replace these with your Google Form field names
-  const FIELD_NAMES = {
-    name: "entry.YOUR_NAME_FIELD_ID",
-    email: "entry.YOUR_EMAIL_FIELD_ID",
-    subject: "entry.YOUR_SUBJECT_FIELD_ID",
-    message: "entry.YOUR_MESSAGE_FIELD_ID",
-  };
+  useEffect(() => {
+    const subject = searchParams.get("subject");
+    if (subject) {
+      setFormData((prev) => ({
+        ...prev,
+        subject,
+      }));
+    }
+  }, [searchParams]);
 
   const validateForm = () => {
     let isValid = true;
@@ -88,21 +90,25 @@ export default function ContactPage() {
     setSubmitStatus("idle");
 
     try {
-      // Create FormData for Google Forms
-      const googleFormData = new FormData();
-      googleFormData.append(FIELD_NAMES.name, formData.name);
-      googleFormData.append(FIELD_NAMES.email, formData.email);
-      googleFormData.append(FIELD_NAMES.subject, formData.subject);
-      googleFormData.append(FIELD_NAMES.message, formData.message);
-
-      // Submit to Google Forms (no-cors mode since Google Forms doesn't support CORS)
-      await fetch(GOOGLE_FORM_ACTION_URL, {
+      const response = await fetch(getFormSubmitContactUrl(), {
         method: "POST",
-        body: googleFormData,
-        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _subject: `Website contact: ${formData.subject}`,
+        }),
       });
 
-      // Since we can't read the response in no-cors mode, we assume success
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch {
@@ -117,87 +123,79 @@ export default function ContactPage() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name as keyof typeof errors]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="min-h-screen bg-surface-page">
       <PageHeader
+        variant="contact"
         subtitle="Contact Us"
         title="Let's Start a Conversation"
         description="Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible."
       />
 
-      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-          {/* Contact Info */}
+      <div className="page-shell py-10 md:py-12">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12">
           <AnimatedSection>
             <div className="space-y-8">
               <div>
-                <h2 className="font-jakarta font-bold text-3xl md:text-4xl text-black mb-6">
+                <h2 className="mb-4 font-jakarta text-3xl font-bold text-text-heading md:text-4xl">
                   Get in Touch
                 </h2>
-                <p className="text-gray-500 text-lg">
+                <p className="text-lg text-text-body">
                   Whether you have a question about our services, need a quote,
-                  just want to say hello, we&apos;re here to help.
+                  or just want to say hello, we&apos;re here to help.
                 </p>
               </div>
 
-              <div className="space-y-6">
-                <motion.div
-                  whileHover={{ x: 8 }}
-                  className="flex items-start gap-4 p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all"
-                >
-                  <div className="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center ">
-                    <Mail className="w-6 h-6 text-white" />
+              <div className="space-y-4">
+                <div className="surface-green flex items-start gap-4 rounded-2xl border border-white/10 p-6 shadow-md">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                    <Mail className="h-6 w-6 text-white" aria-hidden />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg text-black mb-1">
+                    <h3 className="font-semibold text-lg text-white">
                       Email Us
                     </h3>
-                    <p className="text-gray-500">info@convolutionlabs.com</p>
+                    <p className="mt-1 text-sm text-white">{CONTACT_EMAIL}</p>
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  whileHover={{ x: 8 }}
-                  className="flex items-start gap-4 p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all"
-                >
-                  <div className="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-white" />
+                <div className="surface-green flex items-start gap-4 rounded-2xl border border-white/10 p-6 shadow-md">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                    <Phone className="h-6 w-6 text-white" aria-hidden />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg text-black mb-1">
+                    <h3 className="font-semibold text-lg text-white">
                       Call Us
                     </h3>
-                    <p className="text-gray-500">9700045699</p>
+                    <p className="mt-1 text-sm text-white">9700045699</p>
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  whileHover={{ x: 8 }}
-                  className="flex items-start gap-4 p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all"
-                >
-                  <div className="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-white" />
+                <div className="surface-green flex items-start gap-4 rounded-2xl border border-white/10 p-6 shadow-md">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                    <MapPin className="h-6 w-6 text-white" aria-hidden />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg text-black mb-1">
-                      Visit Us
+                    <h3 className="font-semibold text-lg text-white">
+                      Studio
                     </h3>
-                    <p className="text-gray-500">Dhangadi-5, Kailali, Nepal</p>
+                    <p className="mt-1 text-sm text-white">
+                      Distributed studio · booking-friendly time zones
+                    </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary to-[#0d5a0d] text-white p-8 rounded-2xl">
-                <h3 className="font-jakarta font-bold text-xl mb-3">
+              <div className="surface-green rounded-2xl border border-white/10 p-8 shadow-md">
+                <h3 className="font-jakarta text-xl font-bold text-white">
                   Office Hours
                 </h3>
-                <div className="space-y-2 text-sm opacity-90">
+                <div className="mt-4 space-y-2 text-sm text-white">
                   <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
                   <p>Saturday: 10:00 AM - 4:00 PM</p>
                   <p>Sunday: Closed</p>
@@ -206,15 +204,14 @@ export default function ContactPage() {
             </div>
           </AnimatedSection>
 
-          {/* Contact Form */}
           <AnimatedSection delay={0.2}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-white p-8 rounded-2xl shadow-lg"
+              className="rounded-2xl bg-surface-card p-8 shadow-lg"
             >
-              <h3 className="font-jakarta font-bold text-2xl text-black mb-6">
+              <h3 className="mb-6 font-jakarta text-2xl font-bold text-text-heading">
                 Send us a Message
               </h3>
 
@@ -226,7 +223,7 @@ export default function ContactPage() {
                 >
                   <label
                     htmlFor="name"
-                    className="block text-sm font-semibold text-black mb-2"
+                    className="mb-2 block text-sm font-semibold text-text-heading"
                   >
                     Your Name *
                   </label>
@@ -236,13 +233,13 @@ export default function ContactPage() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${
+                    className={`w-full rounded-lg border px-4 py-3 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 ${
                       errors.name ? "border-red-500" : "border-gray-300"
-                    } focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all`}
+                    }`}
                     placeholder="Enter your name"
                   />
                   {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                    <p className="mt-1 text-sm text-red-500">{errors.name}</p>
                   )}
                 </motion.div>
 
@@ -253,7 +250,7 @@ export default function ContactPage() {
                 >
                   <label
                     htmlFor="email"
-                    className="block text-sm font-semibold text-black mb-2"
+                    className="mb-2 block text-sm font-semibold text-text-heading"
                   >
                     Your Email *
                   </label>
@@ -263,13 +260,13 @@ export default function ContactPage() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${
+                    className={`w-full rounded-lg border px-4 py-3 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 ${
                       errors.email ? "border-red-500" : "border-gray-300"
-                    } focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all`}
+                    }`}
                     placeholder="Enter your email"
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
                   )}
                 </motion.div>
 
@@ -280,7 +277,7 @@ export default function ContactPage() {
                 >
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-semibold text-black mb-2"
+                    className="mb-2 block text-sm font-semibold text-text-heading"
                   >
                     Subject *
                   </label>
@@ -290,15 +287,13 @@ export default function ContactPage() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${
+                    className={`w-full rounded-lg border px-4 py-3 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 ${
                       errors.subject ? "border-red-500" : "border-gray-300"
-                    } focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all`}
+                    }`}
                     placeholder="Enter the subject"
                   />
                   {errors.subject && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.subject}
-                    </p>
+                    <p className="mt-1 text-sm text-red-500">{errors.subject}</p>
                   )}
                 </motion.div>
 
@@ -309,7 +304,7 @@ export default function ContactPage() {
                 >
                   <label
                     htmlFor="message"
-                    className="block text-sm font-semibold text-black mb-2"
+                    className="mb-2 block text-sm font-semibold text-text-heading"
                   >
                     Message *
                   </label>
@@ -319,15 +314,13 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className={`w-full px-4 py-3 rounded-lg border ${
+                    className={`w-full resize-none rounded-lg border px-4 py-3 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 ${
                       errors.message ? "border-red-500" : "border-gray-300"
-                    } focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all resize-none`}
+                    }`}
                     placeholder="Enter your message"
                   />
                   {errors.message && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.message}
-                    </p>
+                    <p className="mt-1 text-sm text-red-500">{errors.message}</p>
                   )}
                 </motion.div>
 
@@ -341,16 +334,16 @@ export default function ContactPage() {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full py-4 rounded-full font-bold text-white transition-all ${
+                    className={`w-full rounded-full py-4 font-bold text-white transition-all ${
                       isSubmitting
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-primary hover:bg-opacity-90"
+                        ? "cursor-not-allowed bg-gray-400"
+                        : "bg-primary hover:bg-primary-hover"
                     }`}
                   >
                     {isSubmitting ? (
                       <span className="flex items-center justify-center gap-2">
                         <svg
-                          className="animate-spin h-5 w-5"
+                          className="h-5 w-5 animate-spin"
                           viewBox="0 0 24 24"
                         >
                           <circle
@@ -380,7 +373,7 @@ export default function ContactPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg"
+                    className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-800"
                   >
                     <p className="font-semibold">Success!</p>
                     <p className="text-sm">
@@ -394,7 +387,7 @@ export default function ContactPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg"
+                    className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-800"
                   >
                     <p className="font-semibold">Error</p>
                     <p className="text-sm">
@@ -411,5 +404,30 @@ export default function ContactPage() {
 
       <Footer />
     </div>
+  );
+}
+
+function ContactFallback() {
+  return (
+    <div className="min-h-screen bg-surface-page">
+      <PageHeader
+        variant="contact"
+        subtitle="Contact Us"
+        title="Let's Start a Conversation"
+        description="Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible."
+      />
+      <div className="page-shell py-14 text-center font-jakarta text-text-body">
+        Loading…
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<ContactFallback />}>
+      <ContactPageInner />
+    </Suspense>
   );
 }

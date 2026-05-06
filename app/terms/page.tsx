@@ -1,17 +1,25 @@
+import type { Metadata } from "next";
 import PageHeader from "@/components/Resuable/PageHeader";
 import AnimatedSection from "@/components/Resuable/AnimatedSection";
 import Footer from "@/components/Homepage/Footer";
+import { SITE_NAME } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: `Terms governing use of ${SITE_NAME} websites and services.`,
+};
 
 export default function TermsPage() {
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <div className="bg-surface-page min-h-screen">
       <PageHeader
+        variant="legal"
         subtitle="Terms of Service"
         title="Terms and Conditions"
         description="Please read these terms carefully before using our services."
       />
 
-      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24">
+      <div className="page-shell py-10 md:py-12">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm space-y-8">
@@ -24,8 +32,8 @@ export default function TermsPage() {
                   1. Acceptance of Terms
                 </h2>
                 <p className="text-gray-500 leading-relaxed">
-                  By accessing and using the services provided by Convolution
-                  Labs, you accept and agree to be bound by these Terms of
+                  By accessing and using the services provided by Northsphere
+                  Studio, you accept and agree to be bound by these Terms of
                   Service. If you do not agree to these terms, please do not use
                   our services.
                 </p>
@@ -36,7 +44,7 @@ export default function TermsPage() {
                   2. Service Description
                 </h2>
                 <p className="text-gray-500 leading-relaxed">
-                  Convolution Labs provides digital solutions including web
+                  Northsphere Studio provides digital solutions including web
                   development, mobile applications, design services, and digital
                   marketing. The specific scope of services will be defined in
                   individual service agreements or contracts.
@@ -65,7 +73,7 @@ export default function TermsPage() {
                 </h2>
                 <p className="text-gray-500 leading-relaxed">
                   All content, features, and functionality of our services are
-                  owned by Convolution Labs and are protected by international
+                  owned by Northsphere Studio and are protected by international
                   copyright, trademark, and other intellectual property laws.
                   Client work deliverables are subject to individual contract
                   terms.
@@ -94,7 +102,7 @@ export default function TermsPage() {
                   6. Limitation of Liability
                 </h2>
                 <p className="text-gray-500 leading-relaxed">
-                  To the maximum extent permitted by law, Convolution Labs shall
+                  To the maximum extent permitted by law, Northsphere Studio shall
                   not be liable for any indirect, incidental, special, or
                   consequential damages arising out of or related to your use of
                   our services.
@@ -156,7 +164,7 @@ export default function TermsPage() {
                 </p>
                 <div className="mt-4 p-6 bg-gray-50 rounded-xl">
                   <p className="text-gray-700">
-                    <strong>Email:</strong> legal@convolutionlabs.com
+                    <strong>Email:</strong> legal@northsphere.studio
                   </p>
                   <p className="text-gray-700 mt-2">
                     <strong>Address:</strong> 123 Innovation Street, Tech
